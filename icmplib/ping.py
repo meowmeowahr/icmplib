@@ -39,7 +39,7 @@ from .utils import *
 def ping(
         address: str, 
         count: int = 4, 
-        interval: int = 1, 
+        interval: float = 1, 
         timeout: float = 2, 
         id: Optional[int] = None, 
         source: Optional[str] = None,
