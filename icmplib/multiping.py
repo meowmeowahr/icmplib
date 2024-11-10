@@ -27,13 +27,13 @@
 '''
 
 import asyncio
-from typing import Optional
+from typing import List, Optional
 
 from .ping import async_ping
 
 
 async def async_multiping(
-        addresses: list[str], 
+        addresses: List[str], 
         count: int = 2, 
         interval: float = 0.5, 
         timeout: float = 2,
@@ -173,7 +173,7 @@ async def async_multiping(
 
 
 def multiping(
-        addresses: list[str], 
+        addresses: List[str], 
         count: int = 2, 
         interval: float = 0.5, 
         timeout: float = 2,

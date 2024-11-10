@@ -175,7 +175,7 @@ def ping(
     return Host(address, packets_sent, rtts)
 
 
-async def async_ping(address: str, count: int = 4, interval: int = 1, 
+async def async_ping(address: str, count: int = 4, interval: float = 1, 
                      timeout: float = 2, id: Optional[int] = None, 
                      source: Optional[str] = None, family: Optional[int] = None, 
                      privileged: Optional[bool] = True, **kwargs):

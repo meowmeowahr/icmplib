@@ -26,7 +26,7 @@
     <https://www.gnu.org/licenses/>.
 '''
 
-from typing import Optional
+from typing import List, Optional
 from .exceptions import *
 from .utils import random_byte_message
 
@@ -345,7 +345,7 @@ class Host:
             self, 
             address: str, 
             packets_sent: int, 
-            rtts: list[float]
+            rtts: List[float]
             ):
         self._address = address
         self._packets_sent = packets_sent
@@ -498,7 +498,7 @@ class Hop(Host):
             self, 
             address: str, 
             packets_sent: int, 
-            rtts: list[float], 
+            rtts: List[float], 
             distance: int
             ):
         super().__init__(address, packets_sent, rtts)
