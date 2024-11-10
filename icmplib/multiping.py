@@ -27,13 +27,22 @@
 '''
 
 import asyncio
+from typing import Optional
 
 from .ping import async_ping
 
 
-async def async_multiping(addresses, count=2, interval=0.5, timeout=2,
-        concurrent_tasks=50, source=None, family=None, privileged=True,
-        **kwargs):
+async def async_multiping(
+        addresses: list[str], 
+        count: int = 2, 
+        interval: float = 0.5, 
+        timeout: float = 2,
+        concurrent_tasks: int = 50, 
+        source: Optional[str] = None, 
+        family: Optional[int] = None, 
+        privileged: Optional[bool] = True,
+        **kwargs
+        ):
     '''
     Send ICMP Echo Request packets to several network hosts.
 
@@ -163,9 +172,17 @@ async def async_multiping(addresses, count=2, interval=0.5, timeout=2,
     return [task.result() for task in tasks]
 
 
-def multiping(addresses, count=2, interval=0.5, timeout=2,
-        concurrent_tasks=50, source=None, family=None, privileged=True,
-        **kwargs):
+def multiping(
+        addresses: list[str], 
+        count: int = 2, 
+        interval: float = 0.5, 
+        timeout: float = 2,
+        concurrent_tasks: int = 50, 
+        source: Optional[str] = None, 
+        family: Optional[int] = None, 
+        privileged: Optional[bool] = True,
+        **kwargs
+        ):
     '''
     Send ICMP Echo Request packets to several network hosts.
 

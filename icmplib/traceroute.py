@@ -27,6 +27,7 @@
 '''
 
 from time import sleep
+from typing import Optional
 
 from .sockets import ICMPv4Socket, ICMPv6Socket
 from .models import ICMPRequest, Hop
@@ -34,9 +35,19 @@ from .exceptions import TimeExceeded, ICMPLibError
 from .utils import *
 
 
-def traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1,
-        max_hops=30, fast=False, id=None, source=None, family=None,
-        **kwargs):
+def traceroute(
+        address: str, 
+        count: int = 2, 
+        interval: float = 0.05, 
+        timeout: float = 2, 
+        first_hop: int = 1,
+        max_hops: int = 30, 
+        fast: Optional[bool] = False, 
+        id: Optional[int] = None,
+        source: Optional[str] = None, 
+        family: Optional[int] = None,
+        **kwargs
+        ):
     '''
     Determine the route to a destination host.
 

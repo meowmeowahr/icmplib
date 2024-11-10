@@ -28,6 +28,7 @@
 
 import asyncio
 from time import sleep
+from typing import Optional
 
 from .sockets import ICMPv4Socket, ICMPv6Socket, AsyncSocket
 from .models import ICMPRequest, Host
@@ -35,8 +36,17 @@ from .exceptions import ICMPLibError
 from .utils import *
 
 
-def ping(address, count=4, interval=1, timeout=2, id=None, source=None,
-        family=None, privileged=True, **kwargs):
+def ping(
+        address: str, 
+        count: int = 4, 
+        interval: int = 1, 
+        timeout: float = 2, 
+        id: Optional[int] = None, 
+        source: Optional[str] = None,
+        family: Optional[int] = None, 
+        privileged: Optional[bool] = True, 
+        **kwargs
+        ):
     '''
     Send ICMP Echo Request packets to a network host.
 
@@ -165,8 +175,10 @@ def ping(address, count=4, interval=1, timeout=2, id=None, source=None,
     return Host(address, packets_sent, rtts)
 
 
-async def async_ping(address, count=4, interval=1, timeout=2, id=None,
-        source=None, family=None, privileged=True, **kwargs):
+async def async_ping(address: str, count: int = 4, interval: int = 1, 
+                     timeout: float = 2, id: Optional[int] = None, 
+                     source: Optional[str] = None, family: Optional[int] = None, 
+                     privileged: Optional[bool] = True, **kwargs):
     '''
     Send ICMP Echo Request packets to a network host.
 

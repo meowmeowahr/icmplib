@@ -26,6 +26,7 @@
     <https://www.gnu.org/licenses/>.
 '''
 
+from typing import Optional
 from .exceptions import *
 from .utils import random_byte_message
 
@@ -74,8 +75,16 @@ class ICMPRequest:
     __slots__ = '_destination', '_id', '_sequence', '_payload', \
                 '_payload_size', '_ttl', '_traffic_class', '_time'
 
-    def __init__(self, destination, id, sequence, payload=None,
-            payload_size=56, ttl=64, traffic_class=0):
+    def __init__(
+            self, 
+            destination: str, 
+            id: int, 
+            sequence: int, 
+            payload: Optional[bytes] = None,
+            payload_size: int = 56, 
+            ttl: int = 64, 
+            traffic_class: int = 0
+            ):
 
         if payload:
             payload_size = len(payload)
@@ -199,8 +208,17 @@ class ICMPReply:
     __slots__ = '_source', '_family', '_id', '_sequence', '_type', \
                 '_code', '_bytes_received', '_time'
 
-    def __init__(self, source, family, id, sequence, type, code,
-            bytes_received, time):
+    def __init__(
+            self, 
+            source: str, 
+            family: int, 
+            id: int, 
+            sequence: int, 
+            type: int, 
+            code: int,
+            bytes_received: int, 
+            time: float
+            ):
 
         self._source = source
         self._family = family
@@ -323,7 +341,12 @@ class Host:
     '''
     __slots__ = '_address', '_packets_sent', '_rtts'
 
-    def __init__(self, address, packets_sent, rtts):
+    def __init__(
+            self, 
+            address: str, 
+            packets_sent: int, 
+            rtts: list[float]
+            ):
         self._address = address
         self._packets_sent = packets_sent
         self._rtts = rtts
@@ -471,7 +494,13 @@ class Hop(Host):
     '''
     __slots__ = '_address', '_packets_sent', '_rtts', '_distance'
 
-    def __init__(self, address, packets_sent, rtts, distance):
+    def __init__(
+            self, 
+            address: str, 
+            packets_sent: int, 
+            rtts: list[float], 
+            distance: int
+            ):
         super().__init__(address, packets_sent, rtts)
         self._distance = distance
 

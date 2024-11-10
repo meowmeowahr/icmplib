@@ -29,8 +29,9 @@
 import socket, asyncio
 from struct import pack, unpack
 from time import time
+from typing import Optional
 
-from .models import ICMPReply
+from .models import ICMPReply, ICMPRequest
 from .exceptions import *
 from .utils import PLATFORM_LINUX, PLATFORM_MACOS, PLATFORM_WINDOWS
 
@@ -74,7 +75,7 @@ class ICMPSocket:
     _ICMP_ECHO_REQUEST       = -1
     _ICMP_ECHO_REPLY         = -1
 
-    def __init__(self, address=None, privileged=True):
+    def __init__(self, address: Optional[str] = None, privileged: Optional[bool] = True):
         self._sock = None
         self._address = address
 
@@ -233,7 +234,7 @@ class ICMPSocket:
             bytes_received=bytes_received,
             time=current_time)
 
-    def send(self, request):
+    def send(self, request: ICMPRequest):
         '''
         Send an ICMP request message over the network to a remote host.
 
@@ -287,7 +288,7 @@ class ICMPSocket:
         except OSError as err:
             raise ICMPSocketError(str(err))
 
-    def receive(self, request=None, timeout=2):
+    def receive(self, request: Optional[ICMPRequest] = None, timeout: float = 2):
         '''
         Receive an ICMP reply message from the socket.
 
@@ -532,7 +533,7 @@ class ICMPv4Socket(ICMPSocket):
             socket.SO_BROADCAST) > 0
 
     @broadcast.setter
-    def broadcast(self, enable):
+    def broadcast(self, enable: bool):
         self._sock.setsockopt(
             socket.SOL_SOCKET,
             socket.SO_BROADCAST,
@@ -666,7 +667,7 @@ class AsyncSocket:
     '''
     __slots__ = '_icmp_sock'
 
-    def __init__(self, icmp_sock):
+    def __init__(self, icmp_sock: ICMPSocket):
         self._icmp_sock = icmp_sock
         self._icmp_sock.blocking = False
 
@@ -701,7 +702,7 @@ class AsyncSocket:
         '''
         self.close()
 
-    async def receive(self, request=None, timeout=2):
+    async def receive(self, request: Optional[ICMPRequest] = None, timeout: float = 2):
         '''
         Receive an ICMP reply message from the socket.
 

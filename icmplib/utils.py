@@ -33,6 +33,7 @@ from sys import platform
 from os import getpid
 from re import match
 from random import choices
+from typing import Optional
 
 from .exceptions import NameLookupError
 
@@ -46,7 +47,7 @@ _lock_id = Lock()
 _current_id = PID
 
 
-def random_byte_message(size):
+def random_byte_message(size: int):
     '''
     Generate a random byte sequence of the specified size.
 
@@ -74,7 +75,7 @@ def unique_identifier():
         return _current_id
 
 
-def resolve(name, family=None):
+def resolve(name, family: Optional[int] = None):
     '''
     Resolve a hostname or FQDN to an IP address. Depending on the name
     specified in parameters, several IP addresses may be returned.
@@ -120,7 +121,7 @@ def resolve(name, family=None):
     raise NameLookupError(name)
 
 
-async def async_resolve(name, family=None):
+async def async_resolve(name, family: Optional[int] = None):
     '''
     Resolve a hostname or FQDN to an IP address. Depending on the name
     specified in parameters, several IP addresses may be returned.
@@ -170,7 +171,7 @@ async def async_resolve(name, family=None):
     raise NameLookupError(name)
 
 
-def is_hostname(name):
+def is_hostname(name: str):
     '''
     Indicate whether the specified name is a hostname or an FQDN.
     Return a `boolean`.
@@ -180,7 +181,7 @@ def is_hostname(name):
     return match(pattern, name) is not None
 
 
-def is_ipv4_address(address):
+def is_ipv4_address(address: str):
     '''
     Indicate whether the specified address is an IPv4 address.
     Return a `boolean`.
@@ -190,7 +191,7 @@ def is_ipv4_address(address):
     return match(pattern, address) is not None
 
 
-def is_ipv6_address(address):
+def is_ipv6_address(address: str):
     '''
     Indicate whether the specified address is an IPv6 address.
     Return a `boolean`.
